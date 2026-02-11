@@ -20,6 +20,7 @@ export default function Register() {
     }
   };
 
+
   return (
     <div style={{ maxWidth: "400px", margin: "50px auto" }}>
       <h2>Register</h2>
@@ -57,8 +58,8 @@ export default function Register() {
           onChange={(e) => setRole(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         >
-          <option value="Client">Client</option>
-          <option value="Freelancer">Freelancer</option>
+          <option value="client">Client</option>
+          <option value="freelancer">Freelancer</option>
         </select>
 
         <button style={{ width: "100%", padding: "10px" }}>Register</button>

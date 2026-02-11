@@ -1,14 +1,26 @@
 import React from 'react';
+import {useNavigate } from "react-router-dom";
 
 const ClientDashboard = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+localStorage.removeItem("accesToken");
+localStorage.removeItem("refreshToken");
+    localStorage.removeItem("role");
+    navigate("/login");
+  };
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Client Dashboard</h1>
-      <p>Welcome! Here you will post projects and view proposals.</p>
-      <button onClick={() => {
-        localStorage.clear();
-        window.location.href = '/login';
-      }}>Logout</button>
+      <h1>Welcome, Client</h1>
+      <button onClick={handleLogout}
+      style={{
+        marginTop: "20px",
+        padding: "10px 20px",
+        cursor: "pointer",
+      }}
+      >
+        Logout
+        </button>
     </div>
   );
 };

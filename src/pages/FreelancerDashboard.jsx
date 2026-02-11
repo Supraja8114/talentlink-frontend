@@ -1,14 +1,30 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const FreelancerDashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("role");
+    navigate("/login");
+  };
+
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Freelancer Dashboard</h1>
-      <p>Welcome! Here you will find work and manage contracts.</p>
-      <button onClick={() => {
-        localStorage.clear();
-        window.location.href = '/login';
-      }}>Logout</button>
+      <h1>Welcome, Freelancer</h1>
+
+      <button
+        onClick={handleLogout}
+        style={{
+          marginTop: "20px",
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
+      >
+        Logout
+      </button>
     </div>
   );
 };

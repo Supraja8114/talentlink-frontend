@@ -6,17 +6,27 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Client");
+  const [role, setRole] = useState("client");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const formData = { username: name, email, password, role };
+    console.log("Submitting registration with data:", formData);
 
     try {
-      await api.post("/register", { name, email, password, role });
+      const response = await api.post("/register/", formData);
+      console.log("Registration response:", response);
+      console.log("Registration status:", response.status);
+      console.log("Registration data:", response.data);
       alert("Register Success");
     } catch (error) {
-      alert("Register Failed");
-      console.log(error);
+      console.error("Registration error details:", error);
+      console.error("Error response:", error.response);
+      console.error("Error status:", error.response?.status);
+      console.error("Error data:", error.response?.data);
+      
+      alert("Register Failed: " + (error.response?.data || "Unknown error"));
     }
   };
 

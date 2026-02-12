@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; // 1. Import useNavigate
 import api from "../services/api";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate(); // 2. Initialize the hook
 
@@ -12,7 +12,7 @@ export default function Login() {
     try {
       // NOTE: Check with Harsh! Does his Django backend expect "email" or "username"?
       // If he uses default Django Auth, you might need to change 'email' to 'username' here.
-      const res = await api.post("/login/", { email, password });
+      const res = await api.post("/login/", { username, password });
 
       // 3. Save Tokens (Correct as you had it)
       localStorage.setItem("accessToken", res.data.access);
@@ -31,7 +31,8 @@ export default function Login() {
       } else if (userRole === 'freelancer') {
         navigate('/freelancer-dashboard');
       } else {
-        navigate('/dashboard'); // Fallback default
+        // If role is not recognized, default to client dashboard
+        navigate('/client-dashboard');
       }
 
     } catch (error) {
@@ -46,12 +47,12 @@ export default function Login() {
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "15px" }}>
-            <label>Email</label>
+            <label>Username</label>
             <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             style={{ width: "100%", padding: "10px", marginTop: "5px" }}
             />
